@@ -279,11 +279,11 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
             <div className="legend">
                 <div className="legend-item">
                     <div className="legend-color future"></div>
-                    <span>Future Impact</span>
+                    <span>Future Status</span>
                 </div>
                 <div className="legend-item">
                     <div className="legend-color current"></div>
-                    <span>Current Impact</span>
+                    <span>Current Status</span>
                 </div>
                 <div className="legend-item">
                     <div className="legend-color connecting-line" style={{
