@@ -2,7 +2,7 @@
 export const moduleConfig = {
     MicroSchedule: {
         name: 'MicroSchedule',
-        futureImpact: { x: 60, y: 90 },
+        futureImpact: { x: 60, y: 87 },
         currentImpact: { x: 90, y: 10 },
         description: 'MicroSchedule',
         notes: 'Add your notes, action items, or observations here...',
@@ -10,7 +10,7 @@ export const moduleConfig = {
     },
     GCPMigration: {
         name: 'GCP Migration',
-        futureImpact: { x: 5, y: 95 },
+        futureImpact: { x: 5, y: 92 },
         currentImpact: { x: 95, y: 65 },
         description: 'GCP Migration',
         notes: 'Add your notes, action items, or observations here...',
@@ -18,7 +18,7 @@ export const moduleConfig = {
     },
     HouseKeepingSecurity: {
         name: 'House Keeping & Security Phase 1 & 2',
-        futureImpact: { x: 50, y: 90 },
+        futureImpact: { x: 50, y: 87 },
         currentImpact: { x: 85, y: 30 },
         description: 'House Keeping & Security Phase 1 & 2',
         notes: 'Add your notes, action items, or observations here...',
@@ -34,7 +34,7 @@ export const moduleConfig = {
     },
     AdoptionCallingAI: {
         name: 'Adoption Calling AI',
-        futureImpact: { x: 15, y: 90 },
+        futureImpact: { x: 15, y: 87 },
         currentImpact: { x: 85, y: 10 },
         description: 'Adoption Calling AI',
         notes: 'Add your notes, action items, or observations here...',
@@ -50,7 +50,7 @@ export const moduleConfig = {
     },
     ParentConcernsEscalation: {
         name: 'Parent Concerns Escalation',
-        futureImpact: { x: 20, y: 90 },
+        futureImpact: { x: 20, y: 87 },
         currentImpact: { x: 50, y: 80 },
         description: 'Parent Concerns Escalation',
         notes: 'Add your notes, action items, or observations here...',
@@ -58,7 +58,7 @@ export const moduleConfig = {
     },
     BusTrackingWBKA: {
         name: 'Bus Tracking - WB & KA',
-        futureImpact: { x: 30, y: 90 },
+        futureImpact: { x: 30, y: 87 },
         currentImpact: { x: 80, y: 90 },
         description: 'Bus Tracking - WB & KA',
         notes: 'Add your notes, action items, or observations here...',
@@ -67,7 +67,7 @@ export const moduleConfig = {
     FleetManagement: {
         name: 'Fleet Management',
         futureImpact: { x: 30, y: 85 },
-        currentImpact: { x: 80, y: 80 },
+        currentImpact: { x: 80, y: 77 },
         description: 'Fleet Management',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
@@ -75,22 +75,22 @@ export const moduleConfig = {
     OpinionPollKAPTMs: {
         name: 'Opinion Poll for KA PTMs',
         futureImpact: { x: 15, y: 80 },
-        currentImpact: { x: 50, y: 50 },
+        currentImpact: { x: 50, y: 47 },
         description: 'Opinion Poll for KA PTMs',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
     },
     AnnouncementCommentsTeacherCreation: {
         name: 'Announcement Comments & Teacher Creation',
-        futureImpact: { x: 10, y: 95 },
-        currentImpact: { x: 50, y: 80 },
+        futureImpact: { x: 10, y: 92 },
+        currentImpact: { x: 50, y: 77 },
         description: 'Announcement Comments & Teacher Creation',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
     },
     BusTrackingNewDashboard: {
         name: 'Bus Tracking New Dashboard',
-        futureImpact: { x: 70, y: 95 },
+        futureImpact: { x: 70, y: 92 },
         currentImpact: { x: 90, y: 70 },
         description: 'Bus Tracking New Dashboard',
         notes: 'Add your notes, action items, or observations here...',
@@ -98,7 +98,7 @@ export const moduleConfig = {
     },
     ServiceDeskApprovals: {
         name: 'Service Desk Approvals',
-        futureImpact: { x: 20, y: 95 },
+        futureImpact: { x: 20, y: 92 },
         currentImpact: { x: 60, y: 90 },
         description: 'Service Desk Approvals',
         notes: 'Add your notes, action items, or observations here...',
@@ -106,8 +106,8 @@ export const moduleConfig = {
     },
     DigitalLibraryContentUpload: {
         name: 'Digital Library Content Upload',
-        futureImpact: { x: 15, y: 95 },
-        currentImpact: { x: 80, y: 80 },
+        futureImpact: { x: 15, y: 92 },
+        currentImpact: { x: 82, y: 79 },
         description: 'Digital Library Content Upload',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
@@ -147,7 +147,7 @@ export const moduleConfig = {
     },
     ManpowerReductionWithAI: {
         name: 'Manpower Reduction with AI',
-        futureImpact: { x: 10, y: 95 },
+        futureImpact: { x: 10, y: 92 },
         currentImpact: { x: 40, y: 90 },
         description: 'Manpower Reduction with AI',
         notes: 'Add your notes, action items, or observations here...',
@@ -188,14 +188,14 @@ export const moduleConfig = {
     LDComments: {
         name: 'L&D Comments',
         futureImpact: { x: 10, y: 80 },
-        currentImpact: { x: 60, y: 80 },
+        currentImpact: { x: 60, y: 77 },
         description: 'L&D Comments',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
     },
     RAGChatbotForWebsite: {
         name: 'AI Counsellor for Website',
-        futureImpact: { x: 70, y: 90 },
+        futureImpact: { x: 70, y: 87 },
         currentImpact: { x: 5, y: 5 },
         description: 'RAG Chatbot for Website',
         notes: 'Add your notes, action items, or observations here...',
@@ -203,7 +203,7 @@ export const moduleConfig = {
     },
     BranchAnalytics: {
         name: 'Branch Analytics',
-        futureImpact: { x: 20, y: 90 },
+        futureImpact: { x: 20, y: 87 },
         currentImpact: { x: 80, y: 10 },
         description: 'Branch Analytics',
         notes: 'Add your notes, action items, or observations here...',
@@ -211,7 +211,7 @@ export const moduleConfig = {
     },
     PlatformWideAnalytics: {
         name: 'Platform wide Analytics',
-        futureImpact: { x: 15, y: 95 },
+        futureImpact: { x: 15, y: 92 },
         currentImpact: { x: 70, y: 60 },
         description: 'Platform wide Analytics',
         notes: 'Add your notes, action items, or observations here...',
@@ -219,7 +219,7 @@ export const moduleConfig = {
     },
     SecurityEnhancements: {
         name: 'Security Enhancements',
-        futureImpact: { x: 10, y: 90 },
+        futureImpact: { x: 10, y: 87 },
         currentImpact: { x: 60, y: 60 },
         description: 'Security Enhancements',
         notes: 'Add your notes, action items, or observations here...',
@@ -236,7 +236,7 @@ export const moduleConfig = {
     FrameworkUpgrades: {
         name: 'Framework Upgrades',
         futureImpact: { x: 25, y: 80 },
-        currentImpact: { x: 50, y: 10 },
+        currentImpact: { x: 50, y: 7 },
         description: 'Framework Upgrades',
         notes: 'Add your notes, action items, or observations here...',
         connectingLineStyle: 'solid'
