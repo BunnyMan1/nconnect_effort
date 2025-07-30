@@ -58,7 +58,7 @@ export const moduleConfig = {
     },
     BusTrackingWBKA: {
         name: 'Bus Tracking - WB & KA',
-        futureImpact: { x: 30, y: 87 },
+        futureImpact: { x: 30, y: 90 },
         currentImpact: { x: 80, y: 90 },
         description: 'Bus Tracking - WB & KA',
         notes: 'Add your notes, action items, or observations here...',
