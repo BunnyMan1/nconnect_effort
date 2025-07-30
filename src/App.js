@@ -37,7 +37,7 @@ function App() {
         {/* Sidebar Navigation */}
         <div className="sidebar">
           <div className="sidebar-header">
-            <h3 className="sidebar-title">Modules / Projects</h3>
+            <h3 className="sidebar-title">nConnect Projects</h3>
             <div className="view-mode-toggle">
               <button
                 className={`view-mode-button ${viewMode === 'individual' ? 'active' : ''}`}
