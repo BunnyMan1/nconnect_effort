@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../ImpactEffortChart.css';
 import { moduleConfig, chartConfig, getPlotDimensions } from './moduleConfig';
 
-const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => {
+const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true, showFutureStatus = true, showCurrentStatus = true }) => {
     const [notes, setNotes] = useState('');
     const config = moduleConfig[moduleId];
 
@@ -169,55 +169,65 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
                         </marker>
                     </defs>
 
-                    {/* Connecting line from current to future */}
-                    <line
-                        x1={currentCoords.x}
-                        y1={currentCoords.y}
-                        x2={futureCoords.x}
-                        y2={futureCoords.y}
-                        stroke="#3b82f6"
-                        strokeWidth="3"
-                        strokeDasharray={connectingLineStyle === 'dotted' ? '5,5' : 'none'}
-                        markerEnd="url(#arrowhead)"
-                    />
+                    {/* Connecting line from current to future - only show if both dots are visible */}
+                    {showCurrentStatus && showFutureStatus && (
+                        <line
+                            x1={currentCoords.x}
+                            y1={currentCoords.y}
+                            x2={futureCoords.x}
+                            y2={futureCoords.y}
+                            stroke="#3b82f6"
+                            strokeWidth="3"
+                            strokeDasharray={connectingLineStyle === 'dotted' ? '5,5' : 'none'}
+                            markerEnd="url(#arrowhead)"
+                        />
+                    )}
 
-                    {/* Future Impact Point (Green) */}
-                    <circle
-                        cx={futureCoords.x}
-                        cy={futureCoords.y}
-                        r="12"
-                        fill="#22c55e"
-                        stroke="#16a34a"
-                        strokeWidth="2"
-                    />
-                    <text
-                        x={futureCoords.x}
-                        y={futureCoords.y + 5}
-                        textAnchor="middle"
-                        className="point-text"
-                    >
-                        F
-                    </text>
+                    {/* Future Impact Point (Green) - only show if enabled */}
+                    {showFutureStatus && (
+                        <>
+                            <circle
+                                cx={futureCoords.x}
+                                cy={futureCoords.y}
+                                r="12"
+                                fill="#22c55e"
+                                stroke="#16a34a"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={futureCoords.x}
+                                y={futureCoords.y + 5}
+                                textAnchor="middle"
+                                className="point-text"
+                            >
+                                F
+                            </text>
+                        </>
+                    )}
 
-                    {/* Current Impact Point (Orange) */}
-                    <circle
-                        cx={currentCoords.x}
-                        cy={currentCoords.y}
-                        r="12"
-                        fill="#f97316"
-                        stroke="#ea580c"
-                        strokeWidth="2"
-                    />
-                    <text
-                        x={currentCoords.x}
-                        y={currentCoords.y + 5}
-                        textAnchor="middle"
-                        className="point-text"
-                    >
-                        C
-                    </text>
+                    {/* Current Impact Point (Orange) - only show if enabled */}
+                    {showCurrentStatus && (
+                        <>
+                            <circle
+                                cx={currentCoords.x}
+                                cy={currentCoords.y}
+                                r="12"
+                                fill="#f97316"
+                                stroke="#ea580c"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={currentCoords.x}
+                                y={currentCoords.y + 5}
+                                textAnchor="middle"
+                                className="point-text"
+                            >
+                                C
+                            </text>
+                        </>
+                    )}
 
-                    {/* Final Impact Point (Blue) - Impact for Effort */}
+                    {/* Final Impact Point (Blue) - Impact for Effort - always visible */}
                     <circle
                         cx={finalCoords.x}
                         cy={finalCoords.y}
@@ -297,26 +307,32 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
 
             {/* Legend */}
             <div className="legend">
-                <div className="legend-item">
-                    <div className="legend-color future"></div>
-                    <span>Future Status</span>
-                </div>
-                <div className="legend-item">
-                    <div className="legend-color current"></div>
-                    <span>Current Status</span>
-                </div>
+                {showFutureStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color future"></div>
+                        <span>Future Status</span>
+                    </div>
+                )}
+                {showCurrentStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color current"></div>
+                        <span>Current Status</span>
+                    </div>
+                )}
                 <div className="legend-item">
                     <div className="legend-color" style={{ backgroundColor: '#3b82f6' }}></div>
                     <span>Impact for Effort</span>
                 </div>
-                <div className="legend-item">
-                    <div className="legend-color connecting-line" style={{
-                        background: 'linear-gradient(to right, #3b82f6 50%, transparent 50%)',
-                        backgroundSize: connectingLineStyle === 'dotted' ? '10px 3px' : '100% 3px',
-                        backgroundRepeat: 'repeat-x'
-                    }}></div>
-                    <span>Connecting Line ({connectingLineStyle})</span>
-                </div>
+                {showCurrentStatus && showFutureStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color connecting-line" style={{
+                            background: 'linear-gradient(to right, #3b82f6 50%, transparent 50%)',
+                            backgroundSize: connectingLineStyle === 'dotted' ? '10px 3px' : '100% 3px',
+                            backgroundRepeat: 'repeat-x'
+                        }}></div>
+                        <span>Connecting Line ({connectingLineStyle})</span>
+                    </div>
+                )}
             </div>
 
             {/* Notes Section */}

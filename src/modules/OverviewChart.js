@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../ImpactEffortChart.css';
 import { moduleConfig, chartConfig, getPlotDimensions } from './moduleConfig';
 
-const OverviewChart = () => {
+const OverviewChart = ({ showFutureStatus = true, showCurrentStatus = true }) => {
     const [visibleModules, setVisibleModules] = useState({});
     const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
 
@@ -68,12 +68,16 @@ const OverviewChart = () => {
             if (!module.futureImpact || !module.currentImpact) return;
 
             // Determine quadrant for current status
-            const currentQuadrant = getQuadrant(module.currentImpact);
-            counts[currentQuadrant].current++;
+            if (showCurrentStatus) {
+                const currentQuadrant = getQuadrant(module.currentImpact);
+                counts[currentQuadrant].current++;
+            }
 
             // Determine quadrant for future status
-            const futureQuadrant = getQuadrant(module.futureImpact);
-            counts[futureQuadrant].future++;
+            if (showFutureStatus) {
+                const futureQuadrant = getQuadrant(module.futureImpact);
+                counts[futureQuadrant].future++;
+            }
         });
 
         return counts;
@@ -270,28 +274,32 @@ const OverviewChart = () => {
                             </text>
 
                             {/* Current count */}
-                            <text
-                                x={x}
-                                y={y}
-                                textAnchor="middle"
-                                fontSize="12"
-                                fontWeight="600"
-                                fill="#f97316"
-                            >
-                                Current: {quadrantCounts[quadrant].current}
-                            </text>
+                            {showCurrentStatus && (
+                                <text
+                                    x={x}
+                                    y={y}
+                                    textAnchor="middle"
+                                    fontSize="12"
+                                    fontWeight="600"
+                                    fill="#f97316"
+                                >
+                                    Current: {quadrantCounts[quadrant].current}
+                                </text>
+                            )}
 
                             {/* Future count */}
-                            <text
-                                x={x}
-                                y={y + 15}
-                                textAnchor="middle"
-                                fontSize="12"
-                                fontWeight="600"
-                                fill="#22c55e"
-                            >
-                                Future: {quadrantCounts[quadrant].future}
-                            </text>
+                            {showFutureStatus && (
+                                <text
+                                    x={x}
+                                    y={y + 15}
+                                    textAnchor="middle"
+                                    fontSize="12"
+                                    fontWeight="600"
+                                    fill="#22c55e"
+                                >
+                                    Future: {quadrantCounts[quadrant].future}
+                                </text>
+                            )}
                         </g>
                     ))}
 
@@ -308,46 +316,52 @@ const OverviewChart = () => {
 
                         return (
                             <g key={moduleId}>
-                                {/* Connecting line from current to future */}
-                                <line
-                                    x1={currentCoords.x}
-                                    y1={currentCoords.y}
-                                    x2={futureCoords.x}
-                                    y2={futureCoords.y}
-                                    stroke="#3b82f6"
-                                    strokeWidth="2"
-                                    strokeDasharray={module.connectingLineStyle === 'dotted' ? '5,5' : 'none'}
-                                    markerEnd="url(#overview-arrowhead)"
-                                    opacity="0.7"
-                                />
+                                {/* Connecting line from current to future - only show if both dots are visible */}
+                                {showCurrentStatus && showFutureStatus && (
+                                    <line
+                                        x1={currentCoords.x}
+                                        y1={currentCoords.y}
+                                        x2={futureCoords.x}
+                                        y2={futureCoords.y}
+                                        stroke="#3b82f6"
+                                        strokeWidth="2"
+                                        strokeDasharray={module.connectingLineStyle === 'dotted' ? '5,5' : 'none'}
+                                        markerEnd="url(#overview-arrowhead)"
+                                        opacity="0.7"
+                                    />
+                                )}
 
-                                {/* Future Impact Point (Green) */}
-                                <circle
-                                    cx={futureCoords.x}
-                                    cy={futureCoords.y}
-                                    r="8"
-                                    fill="#22c55e"
-                                    stroke="#16a34a"
-                                    strokeWidth="2"
-                                    onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Future Status')}
-                                    onMouseLeave={handleMouseLeave}
-                                    style={{ cursor: 'pointer' }}
-                                />
+                                {/* Future Impact Point (Green) - only show if enabled */}
+                                {showFutureStatus && (
+                                    <circle
+                                        cx={futureCoords.x}
+                                        cy={futureCoords.y}
+                                        r="8"
+                                        fill="#22c55e"
+                                        stroke="#16a34a"
+                                        strokeWidth="2"
+                                        onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Future Status')}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
 
-                                {/* Current Impact Point (Orange) */}
-                                <circle
-                                    cx={currentCoords.x}
-                                    cy={currentCoords.y}
-                                    r="8"
-                                    fill="#f97316"
-                                    stroke="#ea580c"
-                                    strokeWidth="2"
-                                    onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Current Status')}
-                                    onMouseLeave={handleMouseLeave}
-                                    style={{ cursor: 'pointer' }}
-                                />
+                                {/* Current Impact Point (Orange) - only show if enabled */}
+                                {showCurrentStatus && (
+                                    <circle
+                                        cx={currentCoords.x}
+                                        cy={currentCoords.y}
+                                        r="8"
+                                        fill="#f97316"
+                                        stroke="#ea580c"
+                                        strokeWidth="2"
+                                        onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Current Status')}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
 
-                                {/* Final Impact Point (Blue) - Impact for Effort */}
+                                {/* Final Impact Point (Blue) - Impact for Effort - always visible */}
                                 <circle
                                     cx={finalCoords.x}
                                     cy={finalCoords.y}
@@ -445,22 +459,28 @@ const OverviewChart = () => {
 
             {/* Legend */}
             <div className="overview-legend">
-                <div className="legend-item">
-                    <div className="legend-color future"></div>
-                    <span>Future Status</span>
-                </div>
-                <div className="legend-item">
-                    <div className="legend-color current"></div>
-                    <span>Current Status</span>
-                </div>
+                {showFutureStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color future"></div>
+                        <span>Future Status</span>
+                    </div>
+                )}
+                {showCurrentStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color current"></div>
+                        <span>Current Status</span>
+                    </div>
+                )}
                 <div className="legend-item">
                     <div className="legend-color" style={{ backgroundColor: '#3b82f6' }}></div>
                     <span>Impact for Effort</span>
                 </div>
-                <div className="legend-item">
-                    <div className="legend-color connecting-line"></div>
-                    <span>Connecting Line</span>
-                </div>
+                {showCurrentStatus && showFutureStatus && (
+                    <div className="legend-item">
+                        <div className="legend-color connecting-line"></div>
+                        <span>Connecting Line</span>
+                    </div>
+                )}
             </div>
 
             {/* Module Filter Checkboxes */}

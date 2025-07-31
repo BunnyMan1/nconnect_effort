@@ -10,6 +10,10 @@ function App() {
   const [currentModule, setCurrentModule] = useState('MicroSchedule');
   const [viewMode, setViewMode] = useState('individual'); // 'individual' or 'overview'
 
+  // Global visibility controls
+  const [showFutureStatus, setShowFutureStatus] = useState(false);
+  const [showCurrentStatus, setShowCurrentStatus] = useState(false);
+
   const modules = Object.keys(moduleConfig).map(moduleId => ({
     id: moduleId,
     name: moduleConfig[moduleId].name
@@ -53,6 +57,39 @@ function App() {
               </button>
             </div>
           </div>
+
+          {/* Global Visibility Controls */}
+          <div className="visibility-controls">
+            <h4 className="visibility-title">Chart Visibility</h4>
+            <div className="visibility-switch">
+              <label className="switch-label">
+                <input
+                  type="checkbox"
+                  checked={showFutureStatus}
+                  onChange={(e) => setShowFutureStatus(e.target.checked)}
+                  className="switch-input"
+                />
+                <span className="switch-slider"></span>
+                <span className="switch-text">Future Status (Green)</span>
+              </label>
+            </div>
+            <div className="visibility-switch">
+              <label className="switch-label">
+                <input
+                  type="checkbox"
+                  checked={showCurrentStatus}
+                  onChange={(e) => setShowCurrentStatus(e.target.checked)}
+                  className="switch-input"
+                />
+                <span className="switch-slider"></span>
+                <span className="switch-text">Current Status (Orange)</span>
+              </label>
+            </div>
+            <div className="visibility-note">
+              <small>Blue Impact for Effort dots always visible</small>
+            </div>
+          </div>
+
           <div className="sidebar-content">
             {viewMode === 'individual' && (
               <div className="module-list">
@@ -79,7 +116,10 @@ function App() {
         {/* Main Content Area */}
         <div className="main-content">
           {viewMode === 'overview' ? (
-            <OverviewChart />
+            <OverviewChart
+              showFutureStatus={showFutureStatus}
+              showCurrentStatus={showCurrentStatus}
+            />
           ) : (
             <>
               {moduleConfig[currentModule]?.type === 'pipeline' ? (
@@ -89,6 +129,8 @@ function App() {
                   moduleId={currentModule}
                   onNavigate={handleNavigate}
                   showNavigation={true}
+                  showFutureStatus={showFutureStatus}
+                  showCurrentStatus={showCurrentStatus}
                 />
               )}
             </>
