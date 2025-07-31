@@ -277,6 +277,73 @@
     background-color: #2563eb;
 }
 
+/* Dot Controls Section */
+.dot-controls {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+
+.dot-controls-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 12px 0;
+}
+
+.dot-control-item {
+    margin-bottom: 8px;
+}
+
+.dot-control-item:last-child {
+    margin-bottom: 0;
+}
+
+.dot-control-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.dot-control-label:hover {
+    background-color: #f8fafc;
+}
+
+.dot-control-checkbox {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.dot-control-text {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #475569;
+    font-weight: 500;
+}
+
+.dot-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+    border: 2px solid;
+}
+
+.dot-indicator.future-dot {
+    background-color: #22c55e;
+    border-color: #16a34a;
+}
+
+.dot-indicator.current-dot {
+    background-color: #f97316;
+    border-color: #ea580c;
+}
+
 .overview-info {
     padding: 16px;
     color: #6b7280;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../ImpactEffortChart.css';
 import { moduleConfig, chartConfig, getPlotDimensions } from './moduleConfig';
 
-const OverviewChart = () => {
+const OverviewChart = ({ showFutureDot = false, showCurrentDot = false }) => {
     const [visibleModules, setVisibleModules] = useState({});
     const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
 
@@ -321,30 +321,34 @@ const OverviewChart = () => {
                                 />
 
                                 {/* Future Impact Point (Green) */}
-                                <circle
-                                    cx={futureCoords.x}
-                                    cy={futureCoords.y}
-                                    r="8"
-                                    fill="#22c55e"
-                                    stroke="#16a34a"
-                                    strokeWidth="2"
-                                    onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Future Status')}
-                                    onMouseLeave={handleMouseLeave}
-                                    style={{ cursor: 'pointer' }}
-                                />
+                                {showFutureDot && (
+                                    <circle
+                                        cx={futureCoords.x}
+                                        cy={futureCoords.y}
+                                        r="8"
+                                        fill="#22c55e"
+                                        stroke="#16a34a"
+                                        strokeWidth="2"
+                                        onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Future Status')}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
 
                                 {/* Current Impact Point (Orange) */}
-                                <circle
-                                    cx={currentCoords.x}
-                                    cy={currentCoords.y}
-                                    r="8"
-                                    fill="#f97316"
-                                    stroke="#ea580c"
-                                    strokeWidth="2"
-                                    onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Current Status')}
-                                    onMouseLeave={handleMouseLeave}
-                                    style={{ cursor: 'pointer' }}
-                                />
+                                {showCurrentDot && (
+                                    <circle
+                                        cx={currentCoords.x}
+                                        cy={currentCoords.y}
+                                        r="8"
+                                        fill="#f97316"
+                                        stroke="#ea580c"
+                                        strokeWidth="2"
+                                        onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Current Status')}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
                             </g>
                         );
                     })}
