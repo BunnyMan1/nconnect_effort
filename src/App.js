@@ -9,6 +9,10 @@ import { moduleConfig } from './modules/moduleConfig';
 function App() {
   const [currentModule, setCurrentModule] = useState('MicroSchedule');
   const [viewMode, setViewMode] = useState('individual'); // 'individual' or 'overview'
+  
+  // Global state for dot visibility - both default to false (turned off)
+  const [showFutureDot, setShowFutureDot] = useState(false);
+  const [showCurrentDot, setShowCurrentDot] = useState(false);
 
   const modules = Object.keys(moduleConfig).map(moduleId => ({
     id: moduleId,
@@ -53,6 +57,40 @@ function App() {
               </button>
             </div>
           </div>
+          
+          {/* Dot Visibility Controls */}
+          <div className="dot-controls">
+            <h4 className="dot-controls-title">Status Dots</h4>
+            <div className="dot-control-item">
+              <label className="dot-control-label">
+                <input
+                  type="checkbox"
+                  checked={showFutureDot}
+                  onChange={(e) => setShowFutureDot(e.target.checked)}
+                  className="dot-control-checkbox"
+                />
+                <span className="dot-control-text">
+                  <span className="dot-indicator future-dot"></span>
+                  Future Status (Green)
+                </span>
+              </label>
+            </div>
+            <div className="dot-control-item">
+              <label className="dot-control-label">
+                <input
+                  type="checkbox"
+                  checked={showCurrentDot}
+                  onChange={(e) => setShowCurrentDot(e.target.checked)}
+                  className="dot-control-checkbox"
+                />
+                <span className="dot-control-text">
+                  <span className="dot-indicator current-dot"></span>
+                  Current Status (Orange)
+                </span>
+              </label>
+            </div>
+          </div>
+          
           <div className="sidebar-content">
             {viewMode === 'individual' && (
               <div className="module-list">
@@ -79,7 +117,10 @@ function App() {
         {/* Main Content Area */}
         <div className="main-content">
           {viewMode === 'overview' ? (
-            <OverviewChart />
+            <OverviewChart 
+              showFutureDot={showFutureDot}
+              showCurrentDot={showCurrentDot}
+            />
           ) : (
             <>
               {moduleConfig[currentModule]?.type === 'pipeline' ? (
@@ -89,6 +130,8 @@ function App() {
                   moduleId={currentModule}
                   onNavigate={handleNavigate}
                   showNavigation={true}
+                  showFutureDot={showFutureDot}
+                  showCurrentDot={showCurrentDot}
                 />
               )}
             </>

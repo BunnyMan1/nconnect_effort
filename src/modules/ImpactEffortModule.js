@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../ImpactEffortChart.css';
 import { moduleConfig, chartConfig, getPlotDimensions } from './moduleConfig';
 
-const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => {
+const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true, showFutureDot = false, showCurrentDot = false }) => {
     const [notes, setNotes] = useState('');
     const config = moduleConfig[moduleId];
 
@@ -181,40 +181,48 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
                     />
 
                     {/* Future Impact Point (Green) */}
-                    <circle
-                        cx={futureCoords.x}
-                        cy={futureCoords.y}
-                        r="12"
-                        fill="#22c55e"
-                        stroke="#16a34a"
-                        strokeWidth="2"
-                    />
-                    <text
-                        x={futureCoords.x}
-                        y={futureCoords.y + 5}
-                        textAnchor="middle"
-                        className="point-text"
-                    >
-                        F
-                    </text>
+                    {showFutureDot && (
+                        <>
+                            <circle
+                                cx={futureCoords.x}
+                                cy={futureCoords.y}
+                                r="12"
+                                fill="#22c55e"
+                                stroke="#16a34a"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={futureCoords.x}
+                                y={futureCoords.y + 5}
+                                textAnchor="middle"
+                                className="point-text"
+                            >
+                                F
+                            </text>
+                        </>
+                    )}
 
                     {/* Current Impact Point (Orange) */}
-                    <circle
-                        cx={currentCoords.x}
-                        cy={currentCoords.y}
-                        r="12"
-                        fill="#f97316"
-                        stroke="#ea580c"
-                        strokeWidth="2"
-                    />
-                    <text
-                        x={currentCoords.x}
-                        y={currentCoords.y + 5}
-                        textAnchor="middle"
-                        className="point-text"
-                    >
-                        C
-                    </text>
+                    {showCurrentDot && (
+                        <>
+                            <circle
+                                cx={currentCoords.x}
+                                cy={currentCoords.y}
+                                r="12"
+                                fill="#f97316"
+                                stroke="#ea580c"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={currentCoords.x}
+                                y={currentCoords.y + 5}
+                                textAnchor="middle"
+                                className="point-text"
+                            >
+                                C
+                            </text>
+                        </>
+                    )}
 
                     {/* Y-axis label */}
                     <text
