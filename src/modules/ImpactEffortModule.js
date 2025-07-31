@@ -43,7 +43,7 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
         return <div>Module not found</div>;
     }
 
-    const { name, futureImpact, currentImpact, description, notes: defaultNotes, connectingLineStyle = 'solid' } = config;
+    const { name, futureImpact, currentImpact, finalImpact, description, notes: defaultNotes, connectingLineStyle = 'solid' } = config;
     const { chartWidth, chartHeight, margin } = chartConfig;
     const { plotWidth, plotHeight } = getPlotDimensions();
 
@@ -55,6 +55,7 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
 
     const futureCoords = getCoords(futureImpact);
     const currentCoords = getCoords(currentImpact);
+    const finalCoords = getCoords(finalImpact);
 
     // Grid lines
     const gridLines = [];
@@ -216,6 +217,25 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
                         C
                     </text>
 
+                    {/* Final Impact Point (Blue) - Impact for Effort */}
+                    <circle
+                        cx={finalCoords.x}
+                        cy={finalCoords.y}
+                        r="12"
+                        fill="#3b82f6"
+                        stroke="#2563eb"
+                        strokeWidth="2"
+                    />
+                    <text
+                        x={finalCoords.x}
+                        y={finalCoords.y + 5}
+                        textAnchor="middle"
+                        className="point-text"
+                        style={{ fill: 'white', fontWeight: 'bold' }}
+                    >
+                        I
+                    </text>
+
                     {/* Y-axis label */}
                     <text
                         x={20}
@@ -284,6 +304,10 @@ const ImpactEffortModule = ({ moduleId, onNavigate, showNavigation = true }) => 
                 <div className="legend-item">
                     <div className="legend-color current"></div>
                     <span>Current Status</span>
+                </div>
+                <div className="legend-item">
+                    <div className="legend-color" style={{ backgroundColor: '#3b82f6' }}></div>
+                    <span>Impact for Effort</span>
                 </div>
                 <div className="legend-item">
                     <div className="legend-color connecting-line" style={{

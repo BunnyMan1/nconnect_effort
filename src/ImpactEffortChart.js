@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ImpactEffortChart.css';
 
-const ImpactEffortChart = ({ onNavigate }) => {
+const ImpactEffortChart = ({ onNavigate, moduleData }) => {
     const [notes, setNotes] = useState('');
 
     // Chart dimensions
@@ -12,11 +12,12 @@ const ImpactEffortChart = ({ onNavigate }) => {
     const plotHeight = chartHeight - margin.top - margin.bottom;
 
     // Point positions (as percentages of plot area)
-    const futureImpact = { x: 25, y: 85 }; // Low effort, high impact
-    const currentImpact = { x: 80, y: 20 }; // High effort, low impact
+    const futureImpact = moduleData?.futureImpact || { x: 25, y: 85 }; // Low effort, high impact
+    const currentImpact = moduleData?.currentImpact || { x: 80, y: 20 }; // High effort, low impact
+    const finalImpact = moduleData?.finalImpact || { x: 80, y: 85 }; // Current effort, future impact
 
     // Line style configuration (can be 'solid' or 'dotted')
-    const connectingLineStyle = 'dotted';
+    const connectingLineStyle = moduleData?.connectingLineStyle || 'dotted';
 
     // Keyboard navigation
     useEffect(() => {
@@ -44,6 +45,7 @@ const ImpactEffortChart = ({ onNavigate }) => {
 
     const futureCoords = getCoords(futureImpact);
     const currentCoords = getCoords(currentImpact);
+    const finalCoords = getCoords(finalImpact);
 
     // Grid lines
     const gridLines = [];
@@ -205,6 +207,25 @@ const ImpactEffortChart = ({ onNavigate }) => {
                         C
                     </text>
 
+                    {/* Final Impact Point (Blue) - Impact for Effort */}
+                    <circle
+                        cx={finalCoords.x}
+                        cy={finalCoords.y}
+                        r="12"
+                        fill="#3b82f6"
+                        stroke="#2563eb"
+                        strokeWidth="2"
+                    />
+                    <text
+                        x={finalCoords.x}
+                        y={finalCoords.y + 5}
+                        textAnchor="middle"
+                        className="point-text"
+                        style={{ fill: 'white', fontWeight: 'bold' }}
+                    >
+                        I
+                    </text>
+
                     {/* Y-axis label */}
                     <text
                         x={20}
@@ -273,6 +294,10 @@ const ImpactEffortChart = ({ onNavigate }) => {
                 <div className="legend-item">
                     <div className="legend-color current"></div>
                     <span>Current Impact</span>
+                </div>
+                <div className="legend-item">
+                    <div className="legend-color" style={{ backgroundColor: '#3b82f6' }}></div>
+                    <span>Impact for Effort</span>
                 </div>
                 <div className="legend-item">
                     <div className="legend-color connecting-line" style={{

@@ -304,6 +304,7 @@ const OverviewChart = () => {
 
                         const futureCoords = getCoords(module.futureImpact);
                         const currentCoords = getCoords(module.currentImpact);
+                        const finalCoords = getCoords(module.finalImpact);
 
                         return (
                             <g key={moduleId}>
@@ -342,6 +343,19 @@ const OverviewChart = () => {
                                     stroke="#ea580c"
                                     strokeWidth="2"
                                     onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Current Status')}
+                                    onMouseLeave={handleMouseLeave}
+                                    style={{ cursor: 'pointer' }}
+                                />
+
+                                {/* Final Impact Point (Blue) - Impact for Effort */}
+                                <circle
+                                    cx={finalCoords.x}
+                                    cy={finalCoords.y}
+                                    r="8"
+                                    fill="#3b82f6"
+                                    stroke="#2563eb"
+                                    strokeWidth="2"
+                                    onMouseEnter={(e) => handleMouseEnter(e, module.name, 'Impact for Effort')}
                                     onMouseLeave={handleMouseLeave}
                                     style={{ cursor: 'pointer' }}
                                 />
@@ -438,6 +452,10 @@ const OverviewChart = () => {
                 <div className="legend-item">
                     <div className="legend-color current"></div>
                     <span>Current Status</span>
+                </div>
+                <div className="legend-item">
+                    <div className="legend-color" style={{ backgroundColor: '#3b82f6' }}></div>
+                    <span>Impact for Effort</span>
                 </div>
                 <div className="legend-item">
                     <div className="legend-color connecting-line"></div>
